@@ -8,7 +8,7 @@ function App() {
       <div className="m-4">
         <Navbar />
         <div className="border-2 p-3 bg-zinc-150 w-full rounded-3xl">
-          <h1 className="font-bold text-2xl flex gap-1">
+          <h1 className="font-bold text-2xl flex gap-3">
             <Funnel />
             Filtros
           </h1>
@@ -18,6 +18,7 @@ function App() {
               name=""
               id=""
             >
+              <option value="" disabled selected>Selecione um valor</option>
               <option value="">teste</option>
             </select>
             <select
@@ -25,9 +26,10 @@ function App() {
               name=""
               id=""
             >
-              <option value="">teste</option>
+              <option value="" disabled selected>Selecione um valor</option>
+              <option value="teste" selected>teste</option>
             </select>
-            <input type="date" />
+            <input type="date" className="outline-2 hover:outline-blue-900 rounded-2xl p-3"/>
             <Button classe="outline-1">
               <FunnelX />
               Limpar Filtros
