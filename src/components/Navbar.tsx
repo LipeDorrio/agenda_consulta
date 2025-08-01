@@ -9,12 +9,12 @@ function Navbar() {
         Gerencie consultas médicas de forma eficiente
       </p>
       <div className="flex items-center justify-center">
-        <div className="w-1/2 flex items-center justify-center rounded-3xl my-15">
+        <div className="w-1/2 flex items-center justify-center rounded-3xl my-10">
           <div className="w-full grid grid-cols-2 justify-center gap-3 p-2 items-center bg-zinc-100 rounded-3xl">
-            <Button classe="bg-zinc-200/50">
+            <Button classe="bg-zinc-200/45">
               <CalendarDays /> Agenda
             </Button>
-            <Button classe="bg-zinc-200/50">
+            <Button classe="bg-zinc-200/45">
               <ChartColumn /> Dashboard
             </Button>
           </div>
