@@ -1,5 +1,6 @@
 import { CalendarDays, ChartColumn } from "lucide-react";
 import Button from "./Button";
+import { NavLink } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -11,12 +12,16 @@ function Navbar() {
       <div className="flex items-center justify-center">
         <div className="w-1/2 flex items-center justify-center rounded-3xl my-10">
           <div className="w-full grid grid-cols-2 justify-center gap-3 p-2 items-center bg-zinc-100 rounded-3xl">
-            <Button classe="bg-zinc-200/45">
-              <CalendarDays /> Agenda
-            </Button>
-            <Button classe="bg-zinc-200/45">
-              <ChartColumn /> Dashboard
-            </Button>
+            <NavLink to={"/"}>
+              <Button classe="w-full bg-zinc-200/45">
+                <CalendarDays /> Agenda
+              </Button>
+            </NavLink>
+            <NavLink to={"/dashboard"}>
+              <Button classe="w-full bg-zinc-200/45">
+                <ChartColumn /> Dashboard
+              </Button>
+            </NavLink>
           </div>
         </div>
       </div>
