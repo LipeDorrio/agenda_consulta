@@ -1,7 +1,8 @@
 import { Plus, X } from "lucide-react";
 import Button from "./Button";
 import Input from "./Input";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import axios from "axios";
 
 type Props = {
   isModalOpen: boolean;
@@ -11,6 +12,30 @@ type Props = {
 
 function Modal({ isModalOpen, setIsModalOpen, title }: Props) {
   const modalRef = useRef<HTMLDivElement>(null);
+  const [formData, setFormData] = useState({
+    id_doutor: "",
+    nm_especialidade: "",
+    dt_consulta: "",
+    dt_fimconsulta: "2003-02-02",
+    dt_hora: "",
+    tp_status: "",
+    ds_consulta: "",
+  });
+
+  async function onSave(e: React.FormEvent) {
+    e.preventDefault();
+    await axios.post("http://localhost:3000/consulta", formData);
+    setFormData({
+      id_doutor: "",
+      nm_especialidade: "",
+      dt_consulta: "",
+      dt_fimconsulta: "2003-02-02",
+      dt_hora: "",
+      tp_status: "",
+      ds_consulta: "",
+    });
+    setIsModalOpen(false);
+  }
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -18,6 +43,15 @@ function Modal({ isModalOpen, setIsModalOpen, title }: Props) {
         modalRef.current &&
         !modalRef.current.contains(event.target as Node)
       ) {
+        setFormData({
+          id_doutor: "",
+          nm_especialidade: "",
+          dt_consulta: "",
+          dt_fimconsulta: "2003-02-02",
+          dt_hora: "",
+          tp_status: "",
+          ds_consulta: "",
+        });
         setIsModalOpen(false);
       }
     }
@@ -49,65 +83,112 @@ function Modal({ isModalOpen, setIsModalOpen, title }: Props) {
           <h2 className="text-xl font-bold mb-4 text-center">
             {title} de Consulta
           </h2>
-          <form className="grid grid-cols-1 gap-4">
+          <form onSubmit={onSave} className="grid grid-cols-1 gap-4">
             <label htmlFor="nm_paciente">Paciente:</label>
             <select
-              className="outline-1 rounded-2xl p-3"
+              className="outline-1 rounded-2xl p-3 hover:bg-zinc-300 transition duration-300 focus:bg-transparent"
               name="nm_paciente"
               id="nm_paciente"
+              value={formData.nm_paciente}
+              onChange={(event) =>
+                setFormData({ ...formData, nm_paciente: event.target.value })
+              }
             >
-              <option value="" disabled selected>
+              <option value="" disabled>
                 Selecione um paciente
               </option>
               <option value="12353145234">Joseffer</option>
             </select>
-            <label htmlFor="nm_medico">Médico:</label>
+            <label htmlFor="id_doutor">Médico:</label>
             <select
               className="outline-1 rounded-2xl p-3 hover:bg-zinc-300 transition duration-300 focus:bg-transparent"
-              name="nm_medico"
-              id="nm_medico"
+              name="id_doutor"
+              id="id_doutor"
+              value={formData.id_doutor}
+              onChange={(event) =>
+                setFormData({ ...formData, id_doutor: event.target.value })
+              }
             >
-              <option value="" disabled selected>
+              <option value="" disabled>
                 Selecione um valor
               </option>
+              <option value="234">Augusto</option>
+              <option value="34234">Cardina</option>
             </select>
             <label htmlFor="nm_especialidade">Especialidade:</label>
             <select
               className="outline-1 rounded-2xl p-3 hover:bg-zinc-300 transition duration-300 focus:bg-transparent"
               name="nm_especialidade"
               id="nm_especialidade"
+              value={formData.nm_especialidade}
+              onChange={(event) =>
+                setFormData({
+                  ...formData,
+                  nm_especialidade: event.target.value,
+                })
+              }
             >
-              <option value="" disabled selected>
+              <option value="" disabled>
                 Selecione um valor
               </option>
+              <option value="1234">Dermatologista</option>
+              <option value="343234">Cu</option>
             </select>
             <div className="grid grid-cols-2 gap-5">
-              <Input type="date" label="Data" nm_label="nm_data" />
-              <Input type="time" label="Horário" nm_label="nm_horario" />
+              <Input
+                type="date"
+                label="Data"
+                nm_label="dt_consulta"
+                value={formData.dt_consulta}
+                onChange={(event) =>
+                  setFormData({ ...formData, dt_consulta: event.target.value })
+                }
+              />
+              <Input
+                type="time"
+                label="Horário"
+                nm_label="dt_hora"
+                value={formData.dt_hora}
+                onChange={(event) =>
+                  setFormData({ ...formData, dt_hora: event.target.value })
+                }
+              />
             </div>
-            <label htmlFor="status">Status: </label>
+            <label htmlFor="tp_status">Status: </label>
             <select
               className="outline-1 rounded-2xl p-3 hover:bg-zinc-300 transition duration-300 focus:bg-transparent"
-              name="status"
-              id="status"
+              name="tp_status"
+              id="tp_status"
+              value={formData.tp_status}
+              onChange={(event) =>
+                setFormData({ ...formData, tp_status: event.target.value })
+              }
             >
-              <option value="" disabled selected>
+              <option value="" disabled>
                 Selecione um status
               </option>
               <option value="agendado">Agendado</option>
               <option value="cancelado">Cancelado</option>
               <option value="concluido">Concluído</option>
             </select>
-            <label htmlFor="observacao">Observação:</label>
+            <label htmlFor="ds_consulta">Observação:</label>
             <textarea
               className="outline-1 rounded-2xl p-3 hover:bg-zinc-300 transition duration-300 focus:bg-transparent"
-              name="observacao"
-              id="observacao"
+              name="ds_consulta"
+              id="ds_consulta"
               rows={4}
+              value={formData.ds_consulta}
+              onChange={(event) =>
+                setFormData({ ...formData, ds_consulta: event.target.value })
+              }
               placeholder="Observações sobre a consulta"
             ></textarea>
             <div className="w-full flex justify-center items-center">
-              <Button classe="bg-zinc-400 text-white w-1/2">
+              <Button
+                type="submit"
+                onClick={onSave}
+                classe="bg-zinc-400 text-white w-1/2"
+              >
                 <Plus /> Salvar
               </Button>
             </div>

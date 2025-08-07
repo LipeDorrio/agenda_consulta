@@ -16,7 +16,7 @@ function Filters() {
           id=""
         >
           <option value="">Option 1</option>
-          <option value="" disabled selected>
+          <option value="" disabled>
             Selecione um valor
           </option>
         </select>
@@ -25,10 +25,10 @@ function Filters() {
           name=""
           id=""
         >
-          <option value="" disabled selected>
+          <option value="" disabled>
             Selecione um valor
           </option>
-          <option value="teste" selected>
+          <option value="teste" disabled>
             teste
           </option>
           <option value="">Option 2</option>

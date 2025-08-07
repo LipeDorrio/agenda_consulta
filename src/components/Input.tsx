@@ -4,9 +4,11 @@ type Props = {
   placeholder?: string;
   label?: string;
   nm_label?: string;
+  value?: any;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-function Input({ classe, type, placeholder, label, nm_label }: Props) {
+function Input({ classe, type, placeholder, label, nm_label, value, onChange }: Props) {
   const padraoClasse = "outline-1 hover:outline-blue-900 rounded-2xl p-3";
 
   return (
@@ -21,6 +23,9 @@ function Input({ classe, type, placeholder, label, nm_label }: Props) {
         type={type}
         placeholder={placeholder}
         id={nm_label}
+        name={nm_label}
+        value={value}
+        onChange={onChange}
       />
     </div>
   );
