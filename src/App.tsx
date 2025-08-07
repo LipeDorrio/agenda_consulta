@@ -6,7 +6,7 @@ import Login from "./pages/Login";
 
 function App() {
   return (
-    <div className="h-screen w-screen flex flex-col ">
+    <div className="h-full w-full flex flex-col">
       <Navbar />
       <Routes>
         <Route path="/" element={<Agenda />} />

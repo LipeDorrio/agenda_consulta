@@ -7,6 +7,8 @@ import axios from "axios";
 type Props = {
   isModalOpen: boolean;
   setIsModalOpen: (isOpen: boolean) => void;
+  setConsultas?: (consultas: Array<any>) => void;
+  consultas?: Array<any>;
   title: string;
 };
 
@@ -89,10 +91,10 @@ function Modal({ isModalOpen, setIsModalOpen, title }: Props) {
               className="outline-1 rounded-2xl p-3 hover:bg-zinc-300 transition duration-300 focus:bg-transparent"
               name="nm_paciente"
               id="nm_paciente"
-              value={formData.nm_paciente}
-              onChange={(event) =>
-                setFormData({ ...formData, nm_paciente: event.target.value })
-              }
+              // value={formData.nm_paciente}
+              // onChange={(event) =>
+              //   // setFormData({ ...formData, nm_paciente: event.target.value })
+              // }
             >
               <option value="" disabled>
                 Selecione um paciente

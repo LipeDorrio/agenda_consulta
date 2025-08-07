@@ -1,9 +1,9 @@
-import type { ReactNode } from "react";
+import type { MouseEventHandler, ReactNode } from "react";
 
 type Props = {
   children: ReactNode;
   classe?: string;
-  onClick?: () => void;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
   type?: "button" | "submit" | "reset";
 };
 
