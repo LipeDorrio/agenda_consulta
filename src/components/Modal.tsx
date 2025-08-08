@@ -3,16 +3,17 @@ import Button from "./Button";
 import Input from "./Input";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import type { Consulta } from "../types/Consulta";
 
 type Props = {
   isModalOpen: boolean;
   setIsModalOpen: (isOpen: boolean) => void;
-  setConsultas?: (consultas: Array<any>) => void;
-  consultas?: Array<any>;
+  setConsultas: (consultas: Consulta[]) => void;
+  consultas: Consulta[];
   title: string;
 };
 
-function Modal({ isModalOpen, setIsModalOpen, title }: Props) {
+function Modal({ isModalOpen, setIsModalOpen, title, setConsultas , consultas}: Props) {
   const modalRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState({
     id_doutor: "",
@@ -36,6 +37,7 @@ function Modal({ isModalOpen, setIsModalOpen, title }: Props) {
       tp_status: "",
       ds_consulta: "",
     });
+    setConsultas([...consultas, formData]);
     setIsModalOpen(false);
   }
 
@@ -91,10 +93,6 @@ function Modal({ isModalOpen, setIsModalOpen, title }: Props) {
               className="outline-1 rounded-2xl p-3 hover:bg-zinc-300 transition duration-300 focus:bg-transparent"
               name="nm_paciente"
               id="nm_paciente"
-              // value={formData.nm_paciente}
-              // onChange={(event) =>
-              //   // setFormData({ ...formData, nm_paciente: event.target.value })
-              // }
             >
               <option value="" disabled>
                 Selecione um paciente

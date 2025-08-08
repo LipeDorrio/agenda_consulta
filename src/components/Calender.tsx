@@ -1,8 +1,5 @@
 import { useMemo } from "react";
-
-type Consulta = {
-  id_doutor: string;
-};
+import type { Consulta } from "../types/Consulta";
 
 type CalenderProps = {
   consultas?: Consulta[];
@@ -25,9 +22,11 @@ function Calender({ consultas }: CalenderProps) {
       "19:00",
     ];
   }, []);
+
   const days = useMemo(() => {
     return ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"];
   }, []);
+
   return (
     <div className="flex flex-col items-center justify-start border-1 bg-zinc-50 p-10 rounded-2xl">
       <h1 className="text-2xl font-bold">Calendário</h1>
@@ -64,7 +63,7 @@ function Calender({ consultas }: CalenderProps) {
                       >
                         {consultas?.map((consulta) => (
                           <div className="" key={consulta.id_doutor}>
-                            {consulta.id_doutor}
+                            {consulta.tp_status}
                           </div>
                         ))}
                       </td>
